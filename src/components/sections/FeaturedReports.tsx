@@ -1,173 +1,271 @@
 "use client"
 
 import { useState } from "react"
-import { 
-  Tractor, 
-  Droplets, 
-  Activity, 
-  FlaskConical, 
-  Truck, 
-  Sprout, 
-  Plane, 
-  CloudSun,
-  ChevronRight,
+import Link from "next/link"
+import Image from "next/image"
+import {
+  Cpu,
+  Settings,
+  Droplets,
+  FlaskConical,
+  Activity,
+  Leaf,
+  Navigation,
+  Tractor,
   ArrowRight
 } from "lucide-react"
-import Link from "next/link"
 
-const CATEGORIES = [
-  { name: "AgriTech & Innovation", icon: Tractor },
-  { name: "Precision Agriculture", icon: Tractor },
-  { name: "Farm Equipment & Machinery", icon: Tractor },
-  { name: "Irrigation & Water Management", icon: Droplets },
-  { name: "Livestock Monitoring", icon: Activity },
-  { name: "Agrochemicals & Fertilizers", icon: FlaskConical },
-  { name: "Supply Chain & Logistics", icon: Truck },
-  { name: "Vertical Farming", icon: Sprout },
-  { name: "Drone Technology", icon: Plane },
-  { name: "Climate-Smart Agriculture", icon: CloudSun },
-]
+const TABS = [
+  { id: "all", name: "All" },
+  { id: "agritech", name: "AgriTech" },
+  { id: "irrigation", name: "Irrigation" },
+  { id: "crop-protection", name: "Crop Protection" },
+  { id: "machinery", name: "Machinery" },
+  { id: "livestock", name: "Livestock" },
+];
 
-const REPORTS = [
+const COMMON_COVER_IMAGE = "https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"; // Abstract green layers
+
+const TRENDING_REPORTS = [
   {
-    title: "Global Precision Agriculture Market",
-    desc: "The global precision agriculture market was valued at USD 8.7 billion...",
-    date: "20 Jun 2026",
+    title: "Global Precision Agriculture Market Size, Share & Forecast",
+    shortTitle: "Precision Agriculture Market Analysis",
+    category: "AgriTech",
+    categoryId: "agritech",
+    icon: Cpu,
+    badge: "Hot",
+    cagr: "15.7%",
+    years: "2026–2035",
+    excerpt: "Valued at USD 8.7 billion in 2025, projected to reach USD 24.5 billion by 2035.",
+    price: "From USD 4,990",
+    url: "/report/global-precision-agriculture-market"
   },
   {
-    title: "Agricultural Robotics Industry Analysis",
-    desc: "Key player innovations, market size and future outlook.",
-    date: "12 Jun 2026",
+    title: "Global Agricultural Robotics & Automation Market",
+    shortTitle: "Agricultural Robotics & Automation Market",
+    category: "Machinery",
+    categoryId: "machinery",
+    icon: Settings,
+    badge: null,
+    cagr: "22.4%",
+    years: "2026–2035",
+    excerpt: "Valued at USD 5.3 billion in 2025, projected to reach USD 21.8 billion by 2035.",
+    price: "From USD 4,990",
+    url: "/report/global-agricultural-robotics-market"
   },
   {
-    title: "Smart Irrigation Market Trends &...",
-    desc: "Technology advancements, adoption insights and forecast.",
-    date: "10 Jun 2026",
+    title: "Smart Irrigation Systems Market Size & Forecast",
+    shortTitle: "Smart Irrigation Systems Market",
+    category: "Irrigation",
+    categoryId: "irrigation",
+    icon: Droplets,
+    badge: null,
+    cagr: "12.8%",
+    years: "2026–2035",
+    excerpt: "Valued at USD 1.8 billion in 2025, projected to reach USD 4.9 billion by 2035.",
+    price: "From USD 4,990",
+    url: "/report/smart-irrigation-systems-market"
   },
   {
-    title: "Agrochemicals & Fertilizer Global...",
-    desc: "Comprehensive analysis of the global agrochemicals and fertilizer market.",
-    date: "05 Jun 2026",
+    title: "Biopesticides & Crop Protection Chemicals Market",
+    shortTitle: "Crop Protection Chemicals Market",
+    category: "Crop Protection",
+    categoryId: "crop-protection",
+    icon: FlaskConical,
+    badge: null,
+    cagr: "14.2%",
+    years: "2026–2035",
+    excerpt: "Valued at USD 6.2 billion in 2025, projected to reach USD 18.5 billion by 2035.",
+    price: "From USD 4,990",
+    url: "/report/biopesticides-crop-protection-market"
   },
   {
-    title: "Vertical Farming Market Size, Share &...",
-    desc: "Indoor agriculture trends, hydroponics and growth outlook.",
-    date: "28 May 2026",
+    title: "Livestock Monitoring & Wearable Sensors Market",
+    shortTitle: "Livestock Monitoring Sensors Market",
+    category: "Livestock",
+    categoryId: "livestock",
+    icon: Activity,
+    badge: null,
+    cagr: "18.6%",
+    years: "2026–2035",
+    excerpt: "Valued at USD 2.1 billion in 2025, projected to reach USD 7.2 billion by 2035.",
+    price: "From USD 4,990",
+    url: "/report/livestock-monitoring-sensors-market"
   },
   {
-    title: "Global Agricultural Drones Market",
-    desc: "The impact of UAVs on crop monitoring, spraying and productivity.",
-    date: "22 May 2026",
+    title: "Vertical Farming & Controlled Environment Agriculture",
+    shortTitle: "Vertical Farming & Indoor Agriculture",
+    category: "AgriTech",
+    categoryId: "agritech",
+    icon: Leaf,
+    badge: null,
+    cagr: "20.1%",
+    years: "2026–2035",
+    excerpt: "Valued at USD 4.8 billion in 2025, projected to reach USD 19.3 billion by 2035.",
+    price: "From USD 4,990",
+    url: "/report/vertical-farming-indoor-agriculture"
   },
-]
+  {
+    title: "Agricultural Drones & Remote Sensing Market",
+    shortTitle: "Agricultural Drones & Remote Sensing",
+    category: "AgriTech",
+    categoryId: "agritech",
+    icon: Navigation,
+    badge: null,
+    cagr: "24.8%",
+    years: "2026–2035",
+    excerpt: "Valued at USD 1.5 billion in 2025, projected to reach USD 6.8 billion by 2035.",
+    price: "From USD 4,990",
+    url: "/report/agricultural-drones-uavs-market"
+  },
+  {
+    title: "Global Harvester Machinery Market Size & Share",
+    shortTitle: "Harvester Machinery Market Size",
+    category: "Machinery",
+    categoryId: "machinery",
+    icon: Tractor,
+    badge: null,
+    cagr: "8.5%",
+    years: "2026–2035",
+    excerpt: "Valued at USD 11.2 billion in 2025, projected to reach USD 20.4 billion by 2035.",
+    price: "From USD 4,990",
+    url: "/report/global-harvester-machinery-market"
+  }
+];
 
 export function FeaturedReports() {
-  const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].name)
+  const [activeTab, setActiveTab] = useState("all")
+
+  const filteredReports = activeTab === "all"
+    ? TRENDING_REPORTS
+    : TRENDING_REPORTS.filter(r => r.categoryId === activeTab);
 
   return (
-    <section className="py-10 lg:py-12 bg-gray-50 relative">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">Latest Reports</h2>
-          <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
-            Explore our most recent market intelligence and industry trend analysis.
+    <section className="section-custom bg-white py-20" aria-label="Trending Market Research Reports">
+      <div className="w-full max-w-[1240px] mx-auto px-4 md:px-6">
+        <div className="mb-12">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-8 h-[2px] bg-brand-500"></span>
+            <span className="text-brand-600 text-sm font-bold tracking-wider uppercase">Most Accessed</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Trending Market Research Reports
+          </h2>
+          <p className="text-gray-500 text-[15px] max-w-3xl leading-relaxed">
+            Most-accessed global market research reports updated for 2026. Each includes 10-year forecasts, segmentation, regional analysis, and competitive landscape.
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 p-6 flex flex-col lg:flex-row gap-8 border border-gray-100">
-          
-          {/* Sidebar Categories */}
-          <div className="lg:w-[280px] flex-shrink-0 flex flex-col justify-between">
-            <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4 px-2">Categories</h3>
-              <ul className="space-y-1">
-                {CATEGORIES.map((cat, idx) => {
-                  const isActive = cat.name === activeCategory
-                  return (
-                  <li key={idx}>
-                    <button
-                      onClick={() => setActiveCategory(cat.name)}
-                      className={`w-full flex items-center gap-3 font-medium px-4 py-3 rounded-xl transition-colors text-sm group ${
-                        isActive 
-                          ? "text-brand-700 bg-brand-50 shadow-sm border border-brand-100 font-semibold" 
-                          : "text-gray-500 hover:bg-gray-50 hover:text-gray-900 border border-transparent"
-                      }`}
-                    >
-                      <cat.icon className={`w-5 h-5 flex-shrink-0 ${isActive ? "text-brand-600" : "text-gray-400 group-hover:text-gray-600"}`} />
-                      <span className="text-left">{cat.name}</span>
-                    </button>
-                  </li>
-                )})}
-              </ul>
-            </div>
+        <div className="flex flex-wrap gap-2 mb-10" role="tablist" aria-label="Filter reports by industry">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all border ${activeTab === tab.id
+                  ? "bg-brand-600 text-white border-brand-600 shadow-md"
+                  : "bg-white text-muted border-gray-200 hover:border-brand-300 hover:text-brand-600"
+                }`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.name}
+            </button>
+          ))}
+        </div>
 
-            <div className="mt-6">
-              <Link href="/categories" className="w-full flex items-center justify-center gap-2 bg-white border border-brand-200 text-brand-700 hover:bg-brand-50 font-semibold py-3 px-4 rounded-xl transition-colors text-sm">
-                View all categories
-                <ChevronRight className="w-4 h-4 ml-auto" />
-              </Link>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredReports.map((report, idx) => (
+            <article className="group bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-brand-300 transition-all duration-300 flex flex-col h-full" key={idx}>
+              <Link href={report.url} className="flex flex-col h-full" aria-label={report.title}>
 
-          {/* Reports Content */}
-          <div className="flex-grow flex flex-col min-w-0">
-            {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 min-h-[60px]">
-              <div>
-                <h2 key={activeCategory + "-title"} className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight animate-in fade-in slide-in-from-left-4 duration-500">
-                  {activeCategory}
-                </h2>
-                <p className="text-gray-500 text-sm mt-1">Latest market intelligence and trend analysis</p>
-              </div>
-              <a
-                href="/reports"
-                className="inline-flex items-center gap-1 bg-white border border-gray-200 text-gray-700 hover:border-brand-500 hover:text-brand-700 font-semibold py-2 px-4 rounded-lg transition-colors text-sm shadow-sm"
-              >
-                View all reports
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-
-            {/* Grid */}
-            <div key={activeCategory + "-grid"} className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both">
-              {REPORTS.map((report, idx) => (
-                <Link href={`/report/${report.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} key={idx} className="bg-white rounded-xl border border-gray-200 shadow hover:shadow-md hover:border-brand-500 transition-all duration-300 group flex flex-col h-full overflow-hidden">
-                  {/* Top: Book cover */}
-                  <div className="relative h-32 flex-shrink-0 bg-gradient-to-br from-brand-600 via-brand-700 to-gray-900 text-white p-4 flex flex-col justify-between">
-                    <div className="absolute inset-0 opacity-20">
-                      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-white" fill="none" stroke="currentColor" strokeWidth="0.5">
-                        <path d="M0,50 Q50,100 100,50" />
-                        <path d="M0,60 Q50,110 100,60" />
-                      </svg>
+                {/* Report Cover Banner Section */}
+                <div className="relative h-40 w-full bg-gradient-to-br from-[#0A3D0F] via-[#1B5E20] to-[#2E7D32] overflow-hidden border-b-4 border-[#F9A825]">
+                  
+                  {/* Spine */}
+                  <div className="absolute top-0 left-0 h-full w-8 bg-[#0A2E0E] border-r border-[#1B5E20] flex items-center justify-center">
+                    <div className="flex flex-col gap-8 opacity-40">
+                      <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
                     </div>
-                    <div className="relative z-10 flex justify-between items-start">
-                      <span className="bg-white text-brand-700 text-[9px] font-bold px-2 py-0.5 rounded shadow-sm">REPORT</span>
-                    </div>
-                    <div className="relative z-10 text-sm font-bold mt-auto tracking-wide">2026</div>
                   </div>
 
-                  {/* Bottom: text */}
-                  <div className="flex flex-col flex-grow p-5 min-w-0">
-                    <h3 className="text-[14px] font-bold text-gray-900 mb-2 leading-snug group-hover:text-brand-700 transition-colors line-clamp-2" title={report.title}>
-                      {report.title}
-                    </h3>
-                    <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed mb-6">{report.desc}</p>
+                  {/* Subtle Grid Pattern */}
+                  <div className="absolute inset-0 ml-8 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '12px 12px' }}></div>
 
-                    <div className="mt-auto pt-3 border-t border-gray-100 flex items-end justify-between gap-2">
-                      <div className="flex flex-col">
-                        <span className="text-[9px] text-gray-400 font-medium mb-0.5">Pub Date</span>
-                        <span className="text-[10px] text-gray-700 font-semibold leading-tight">{report.date}</span>
-                      </div>
-                      <span className="text-brand-600 group-hover:text-brand-800 text-[11px] font-bold flex items-center gap-1 transition-colors group/link whitespace-nowrap">
-                        Read Report
-                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  {/* Corner Fold / Design element */}
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-[#1A5320] rounded-bl-[40px] opacity-40"></div>
+                  
+                  {/* Top-right "RESEARCH" watermark */}
+                  <div className="absolute top-3 right-4 text-white/5 font-serif text-[10px] uppercase tracking-[0.3em] font-bold">
+                    Research
+                  </div>
+
+                  {/* Text Overlay */}
+                  <div className="absolute inset-0 left-12 right-5 py-6 flex flex-col text-white z-10">
+                    <div className="flex items-center gap-2 opacity-90">
+                      <div className="w-1.5 h-1.5 rounded-sm bg-[#F9A825]"></div>
+                      <span className="text-[9px] font-bold tracking-widest uppercase text-[#A2C1A5]">AII Industry Report</span>
+                    </div>
+                    <div className="mt-auto">
+                      <h4 className="text-[19px] font-bold font-serif leading-snug line-clamp-3 pr-2">{report.shortTitle}</h4>
+                    </div>
+                  </div>
+
+                  {report.badge && (
+                    <span className="absolute top-4 right-4 bg-[#F9A825] text-[#0A2E0E] text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-md z-20">
+                      {report.badge}
+                    </span>
+                  )}
+                </div>
+
+                {/* Content Section */}
+                <div className="p-5 flex flex-col flex-1">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="bg-brand-50 text-brand-600 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+                      {report.category}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-bold text-soil mb-4 group-hover:text-brand-600 transition-colors line-clamp-2">
+                    {report.title}
+                  </h3>
+
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="bg-green-50 border border-green-100 text-brand-600 text-xs font-bold px-2 py-1 rounded">
+                      CAGR: {report.cagr}
+                    </span>
+                    <span className="text-xs font-medium text-muted bg-gray-50 border border-gray-100 px-2 py-1 rounded">
+                      {report.years}
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-muted line-clamp-2 mb-6 flex-1">
+                    {report.excerpt}
+                  </p>
+
+                  <div className="pt-4 border-t border-gray-100 flex items-center justify-between mt-auto">
+                    <div className="flex flex-col">
+                      <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">Starting From</span>
+                      <span className="text-base font-black text-[#1A5320]">
+                        ${report.price.replace("From USD ", "")}
                       </span>
                     </div>
+                    <span className="text-xs font-bold text-[#1A5320] flex items-center group-hover:text-white group-hover:bg-[#1A5320] bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-full transition-all duration-300 shadow-sm">
+                      View Report <ArrowRight size={14} className="ml-1 transition-transform group-hover:translate-x-1" />
+                    </span>
                   </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+                </div>
+
+              </Link>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <Link href="/reports" className="inline-flex items-center px-8 py-3 bg-brand-600 text-white font-bold rounded-lg shadow-md hover:bg-brand-700 hover:shadow-lg transition-all">
+            View All 20,000+ Reports <ArrowRight size={18} className="ml-2" />
+          </Link>
         </div>
       </div>
     </section>

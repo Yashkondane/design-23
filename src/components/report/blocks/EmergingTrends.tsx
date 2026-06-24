@@ -1,24 +1,30 @@
 export function EmergingTrends() {
-  const trends = [
-    { title: "Convergence of AI with Edge Devices", desc: "AI is increasingly deployed alongside on-device inference engines to create intelligent edge endpoints in farm equipment." },
-    { title: "Autonomous Robotics Reshaping Logistics", desc: "Autonomous tractors and harvesting robots spanning thousands of acres in single deployments, enabling centralized yield management." },
-    { title: "Satellite Imagery Accelerating Insights", desc: "Advanced capabilities that enable sub-meter crop monitoring accuracy, allowing precise localized chemical deployment." },
-    { title: "Ultra-Low-Power Sensor Networks", desc: "Advances in IoT power architecture are enabling coin-cell and energy-harvesting designs that support multi-year operational lifespans for soil sensors." }
-  ]
-
   return (
-    <div className="mt-12 mb-12 pt-8">
-      <h2 className="text-2xl font-bold text-brand-600 mb-6">
-        Key Emerging Trends in the Precision Agriculture Market
-      </h2>
-<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {trends.map((trend, idx) => (
-          <div key={idx} className="bg-white rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-100 border-l-[4px] border-l-brand-600 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] hover:border-l-brand-500 transition-all">
-            <h4 className="text-[15px] font-bold text-brand-900 mb-3 leading-snug">{trend.title}</h4>
-            <p className="text-[13px] text-gray-600 leading-relaxed">{trend.desc}</p>
-          </div>
-        ))}
+    <section className="content-section" id="trends" aria-labelledby="tr-heading">
+      <h2 id="tr-heading">Key Emerging Trends in the Precision Agriculture Market</h2>
+      <p>Based on AII&apos;s research, we found that four structural trends are reshaping the Precision Agriculture market&apos;s competitive and technology landscape between 2026 and 2035.</p>
+      <div className="trend-grid">
+        <div className="trend-card">
+          <div className="trend-num">Trend 01</div>
+          <div className="trend-title">AI-Powered Prescriptive Analytics Are Redefining Field Management</div>
+          <div className="trend-body">Vendors including John Deere, Trimble, and Climate LLC are embedding machine learning into field analytics platforms. As of 2026, AI-driven prescription services represent approximately 14% of software revenue and are projected to reach 32% by 2035, shifting vendor economics from one-time hardware sales to recurring data subscriptions.</div>
+        </div>
+        <div className="trend-card">
+          <div className="trend-num">Trend 02</div>
+          <div className="trend-title">Satellite Connectivity Is Removing Rural Coverage Barriers</div>
+          <div className="trend-body">As of Q1 2026, low-earth-orbit satellite networks including Starlink are enabling real-time field data transmission in previously unconnected rural regions. This connectivity expansion is drawing mid-sized farms in emerging markets into the addressable market, expanding the total customer base by an estimated 28% versus the 2023 baseline.</div>
+        </div>
+        <div className="trend-card">
+          <div className="trend-num">Trend 03</div>
+          <div className="trend-title">Autonomous Machinery Is Driving Adoption Across Row Crops</div>
+          <div className="trend-body">Global labor shortages in agriculture are accelerating demand for autonomous tractors and robotic harvesters. AII&apos;s assessment indicates that autonomous and semi-autonomous machinery segments are growing at 15.8% CAGR in precision agriculture adoption, with planting and spraying as the dominant automated workflows.</div>
+        </div>
+        <div className="trend-card">
+          <div className="trend-num">Trend 04</div>
+          <div className="trend-title">Sustainability Mandates Are Accelerating Variable Rate Adoption</div>
+          <div className="trend-body">Carbon credit programs and fertilizer-runoff regulations are pushing farmers toward variable rate application to reduce input waste. This regulatory pressure is expected to compress per-acre input costs by 12&ndash;18% while improving yields, according to agricultural extension data reviewed by AII in 2026.</div>
+        </div>
       </div>
-    </div>
-  )
+    </section>
+  );
 }

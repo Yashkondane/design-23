@@ -85,8 +85,8 @@ export function ClientMarquee() {
   const arr = [Logos.tailwindcss, Logos.framer, Logos.nextjs, Logos.aws]
 
   return (
-    <section className="py-10 lg:py-12 bg-gray-50 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section className="py-10 lg:py-12 bg-white border-t border-gray-100">
+      <div className="w-full max-w-[1240px] mx-auto px-4 md:px-6 text-center">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">Our Clients</h2>
           <p className="mt-4 text-gray-500 max-w-2xl mx-auto">

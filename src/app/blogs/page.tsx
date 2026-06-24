@@ -99,22 +99,37 @@ export default function BlogsPage() {
       <Header />
       <main>
         {/* Hero Banner */}
-        <div className="bg-[#14532d] text-white py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto text-center">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Blogs & Insights</h1>
-            <p className="text-green-50/90 text-lg max-w-2xl mx-auto mb-8">
+        <section
+          style={{
+            background: "linear-gradient(160deg, #0D3B12 0%, #1B5E20 50%, #2E7D32 100%)",
+            padding: "56px 24px 52px",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div style={{ position: "absolute", top: "-60px", right: "-80px", width: "420px", height: "420px", borderRadius: "50%", background: "radial-gradient(circle, rgba(102, 187, 106, 0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+            <nav className="flex items-center gap-1.5 text-xs mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
+              <Link href="/" className="hover:text-white" style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>Home</Link>
+              <span style={{ color: "rgba(255,255,255,0.35)" }}>&rsaquo;</span>
+              <span style={{ color: "rgba(255,255,255,0.9)" }}>Blogs</span>
+            </nav>
+            <h1 className="font-serif" style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "12px" }}>
+              Blogs &amp; Insights
+            </h1>
+            <p style={{ color: "rgba(255,255,255,0.78)", fontSize: "16px", lineHeight: 1.7, maxWidth: "680px", marginBottom: "28px" }}>
               Expert analysis, thought leadership, and deep dives into the trends shaping the future of agriculture.
             </p>
-            <div className="max-w-xl mx-auto relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <div style={{ position: "relative", maxWidth: "560px" }}>
+              <Search style={{ position: "absolute", left: "20px", top: "50%", transform: "translateY(-50%)", width: "20px", height: "20px", color: "#9ca3af", pointerEvents: "none" }} />
               <input
                 type="text"
                 placeholder="Search blog posts..."
-                className="w-full py-3.5 pl-12 pr-6 rounded-full bg-white text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400 shadow-lg text-[14px]"
+                style={{ width: "100%", height: "52px", paddingLeft: "52px", paddingRight: "24px", borderRadius: "9999px", backgroundColor: "#ffffff", color: "#1f2937", border: "none", outline: "none", boxShadow: "0 10px 25px rgba(0,0,0,0.15)", fontSize: "14px", boxSizing: "border-box" }}
               />
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

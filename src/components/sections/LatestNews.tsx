@@ -1,171 +1,124 @@
+import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
-import { InteractiveMarquee } from "@/components/ui/interactive-marquee"
-import Link from "next/link"
-
-const NEWS = [
-  {
-    title: "John Deere Unveils Next-Gen Autonomous Tractor with AI Capabilities",
-    desc: "The new machine integrates advanced machine learning models to optimize planting and harvesting without human intervention.",
-    date: "June 15, 2026",
-    imgUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Tractor in field"
-  },
-  {
-    title: "India's Agri Exports Reach Record High in FY 2026",
-    desc: "Driven by strong demand for rice and marine products, the country's agricultural exports surged past projected targets this year.",
-    date: "June 14, 2026",
-    imgUrl: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Agriculture field"
-  },
-  {
-    title: "Global Fertilizer Prices Show Steady Decline",
-    desc: "Easing supply chain disruptions and lower natural gas prices have contributed to a global stabilization in essential fertilizer costs.",
-    date: "June 15, 2026",
-    imgUrl: "https://images.unsplash.com/photo-1590682680695-43b964a3ae17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Planting seeds"
-  },
-  {
-    title: "Agri Drone Startups Raise $120M in Q2 2026",
-    desc: "Venture capital continues to flow into aerial crop monitoring as precision agriculture becomes the standard for large-scale farms.",
-    date: "June 13, 2026",
-    imgUrl: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Drone flying over crop"
-  },
-  {
-    title: "World Bank Invests $500M in Sustainable Agriculture Projects",
-    desc: "The new funding aims to support climate-resilient farming practices across developing nations over the next five years.",
-    date: "June 14, 2026",
-    imgUrl: "https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Silos and farming"
-  },
-  {
-    title: "Demand for Dairy Products to Grow 18% by 2030: Report",
-    desc: "Changing dietary habits and rising populations in emerging economies are expected to drive unprecedented growth in global dairy consumption.",
-    date: "June 12, 2026",
-    imgUrl: "https://images.unsplash.com/photo-1596733430284-f7437764b1a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Dairy cows"
-  },
-  {
-    title: "New AI Models Predict Crop Disease Outbreaks with 95% Accuracy",
-    desc: "Researchers have developed a breakthrough algorithm that analyzes satellite imagery and weather patterns to forecast blight before it strikes.",
-    date: "June 11, 2026",
-    imgUrl: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Crop disease"
-  },
-  {
-    title: "Sustainable Packaging Initiatives Gain Momentum in Food Processing",
-    desc: "Major food manufacturers are pledging to eliminate single-use plastics from their supply chains by 2030 in response to consumer pressure.",
-    date: "June 10, 2026",
-    imgUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Sustainable packaging"
-  }
-]
 
 export function LatestNews() {
-  const featuredNews = NEWS[0];
-  const sidebarNews = NEWS.slice(1, 4);
+  const recentNews = [
+    {
+      title: "AII Surpasses 20,000 Published Market Research Reports",
+      tag: "Milestone",
+      date: "June 12, 2026",
+      imgUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      url: "/news/aii-surpasses-report-milestone"
+    },
+    {
+      title: "AII Partners with Global Agriculture Council for Precision Farming Tracking",
+      tag: "Partnership",
+      date: "June 5, 2026",
+      imgUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      url: "/news/aii-partners-agriculture-council"
+    },
+    {
+      title: "AII Wheat and Soy Market Forecast Cited in Bloomberg Intelligence Report",
+      tag: "Media",
+      date: "May 28, 2026",
+      imgUrl: "https://images.unsplash.com/photo-1590682680695-43b964a3ae17?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      url: "/news/aii-cited-bloomberg-report"
+    },
+    {
+      title: "AII Launches Enterprise Research Platform with API Data Access",
+      tag: "Product",
+      date: "May 20, 2026",
+      imgUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      url: "/news/aii-launches-enterprise-platform"
+    },
+    {
+      title: "AII Named 'Best Agriculture Research Firm 2026' by AgTech Weekly",
+      tag: "Award",
+      date: "May 10, 2026",
+      imgUrl: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      url: "/news/aii-best-research-firm-award"
+    },
+    {
+      title: "AII Publishes 2026 Global Vertical Farming Market Analysis",
+      tag: "Research",
+      date: "May 5, 2026",
+      imgUrl: "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+      url: "/news/aii-vertical-farming-analysis"
+    }
+  ];
 
   return (
-    <section className="py-16 lg:py-24 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="flex justify-between items-end mb-12 border-b border-gray-200 pb-6">
-          <div>
-            <span className="text-brand-600 font-bold tracking-wider uppercase text-sm mb-2 block">Industry Updates</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">Latest News</h2>
+    <section className="bg-brand-50 py-20 px-6" aria-label="AII News and Press Releases">
+      <div className="w-full max-w-[1240px] mx-auto px-4 md:px-6">
+        <div className="mb-12">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-8 h-[2px] bg-accent"></span>
+            <span className="text-brand-600 text-sm font-bold tracking-wider uppercase">News &amp; Press</span>
           </div>
-          <Link
-            href="/news"
-            className="text-brand-700 font-semibold flex items-center gap-2 hover:text-brand-800 transition-colors bg-brand-50 px-4 py-2 rounded-lg"
-          >
-            View All
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Latest News from Agriculture Industry Insights</h2>
+          <p className="text-gray-500 text-[15px] max-w-3xl leading-relaxed">Company announcements, media coverage, research launches, and industry recognition.</p>
         </div>
 
-        {/* Asymmetric Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          {/* Main Featured Article (Left) */}
-          <Link
-            href={`/news/${featuredNews.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-            className="lg:col-span-8 group flex flex-col"
-          >
-            <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-6 shadow-md border border-gray-100">
-              <Image
-                src={featuredNews.imgUrl}
-                alt={featuredNews.alt}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* Featured News (Left) */}
+          <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div className="relative aspect-video w-full">
+              <Image 
+                src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="AII Agriculture Global Expansion"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                className="object-cover"
                 priority
               />
-              <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold uppercase px-3 py-1.5 rounded shadow-sm tracking-wide">
-                Top Story
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <span className="absolute bottom-4 left-6 bg-accent text-brand-900 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded">Press Release</span>
             </div>
-            
-            <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
-              <span className="font-bold text-brand-700 uppercase tracking-wider text-xs">AgriTech</span>
-              <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-              <span className="font-medium text-red-600">2 hours ago</span>
-            </div>
-            
-            <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight mb-4 group-hover:text-brand-700 transition-colors">
-              {featuredNews.title}
-            </h3>
-            
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed line-clamp-3">
-              {featuredNews.desc}
-            </p>
-          </Link>
-
-          {/* Sidebar News (Right) */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            <h4 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-              Trending Now
-            </h4>
-            
-            {sidebarNews.map((item, idx) => (
-              <Link
-                key={idx}
-                href={`/news/${item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                className="group flex gap-5 pb-6 border-b border-gray-100 last:border-0 last:pb-0"
-              >
-                <div className="relative w-28 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-sm border border-gray-100">
-                  <Image
-                    src={item.imgUrl}
-                    alt={item.alt}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                
-                <div className="flex flex-col justify-center">
-                  <div className="flex items-center gap-2 text-[11px] text-gray-400 font-medium mb-1.5 uppercase tracking-wide">
-                    <span className="text-brand-600">Markets</span>
-                    <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-                    <span>{idx === 0 ? '5h ago' : item.date}</span>
-                  </div>
-                  
-                  <h5 className="text-[15px] font-bold text-gray-900 leading-snug group-hover:text-brand-700 transition-colors line-clamp-3">
-                    {item.title}
-                  </h5>
-                </div>
+            <div className="p-8">
+              <div className="text-sm font-medium text-muted mb-3">June 18, 2026</div>
+              <h3 className="text-2xl font-bold text-brand-700 mb-4 hover:text-brand-500 transition-colors">
+                <Link href="/news/aii-expands-asia-pacific-coverage">
+                  AII Expands Global Agriculture Market Coverage to 38 Countries with New Research Analyst Team Hires
+                </Link>
+              </h3>
+              <p className="text-soil/80 leading-relaxed mb-6">
+                Agriculture Industry Insights today announced the expansion of its research capabilities to include 8 new country-level agricultural markets in Asia-Pacific, bringing total geographic coverage to 38 countries. The expansion is supported by senior research analyst hires specializing in irrigation, drone logistics, and climate-smart seeds.
+              </p>
+              <Link href="/news/aii-expands-asia-pacific-coverage" className="inline-flex items-center font-bold text-brand-600 hover:text-brand-500 transition-colors">
+                Read Full Announcement <ArrowRight size={16} className="ml-2" />
               </Link>
-            ))}
-            
-            <div className="mt-4 p-5 bg-gray-50 rounded-xl border border-gray-100 text-center">
-              <p className="text-sm text-gray-600 font-medium mb-3">Get daily agriculture news delivered to your inbox.</p>
-              <div className="flex">
-                <input type="email" placeholder="Email address" className="w-full px-3 py-2 text-sm rounded-l-lg border border-gray-300 focus:outline-none focus:border-brand-500" />
-                <button className="bg-brand-700 hover:bg-brand-800 text-white px-4 text-sm font-bold rounded-r-lg transition-colors">Join</button>
-              </div>
             </div>
           </div>
-          
+
+          {/* News List (Right) */}
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+            <div className="flex justify-between items-center p-6 border-b border-gray-100">
+              <h3 className="font-bold text-soil text-lg">Recent Updates</h3>
+              <Link href="/news" className="text-sm font-medium text-brand-600 hover:text-brand-500 flex items-center">
+                View All News <ArrowRight size={14} className="ml-1" />
+              </Link>
+            </div>
+
+            <div className="flex flex-col">
+              {recentNews.map((item, idx) => (
+                <Link href={item.url} className="group flex items-start gap-4 p-5 border-b border-gray-100 hover:bg-brand-50 transition-colors last:border-0" key={idx}>
+                  <div className="relative w-16 h-12 rounded overflow-hidden flex-shrink-0 bg-gray-100">
+                    <Image 
+                      src={item.imgUrl}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="flex flex-col flex-1 min-w-0">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-brand-600 mb-1">{item.tag}</span>
+                    <div className="text-sm font-bold text-soil group-hover:text-brand-600 transition-colors line-clamp-2 leading-snug mb-1.5">{item.title}</div>
+                    <div className="text-xs text-muted">{item.date}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

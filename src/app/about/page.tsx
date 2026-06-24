@@ -22,7 +22,7 @@ const VALUES = [
   {
     title: "Actionable Insights",
     icon: Target,
-    desc: "We don't just provide data; we provide strategic recommendations that drive business growth."
+    desc: "We don&apos;t just provide data; we provide strategic recommendations that drive business growth."
   },
   {
     title: "Client-Centric",

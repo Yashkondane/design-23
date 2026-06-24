@@ -87,14 +87,37 @@ export default function NewsPage() {
       <Header />
       
       {/* Hero Banner */}
-      <div className="bg-[#14532d] text-white py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Agriculture News</h1>
-          <p className="text-green-50/90 text-lg max-w-2xl mx-auto">
+      <section
+        style={{
+          background: "linear-gradient(160deg, #0D3B12 0%, #1B5E20 50%, #2E7D32 100%)",
+          padding: "56px 24px 52px",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ position: "absolute", top: "-60px", right: "-80px", width: "420px", height: "420px", borderRadius: "50%", background: "radial-gradient(circle, rgba(102, 187, 106, 0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <nav className="flex items-center gap-1.5 text-xs mb-5" style={{ color: "rgba(255,255,255,0.6)" }}>
+            <Link href="/" className="hover:text-white" style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>Home</Link>
+            <span style={{ color: "rgba(255,255,255,0.35)" }}>&rsaquo;</span>
+            <span style={{ color: "rgba(255,255,255,0.9)" }}>News</span>
+          </nav>
+          <h1 className="font-serif" style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: "12px" }}>
+            Agriculture News
+          </h1>
+          <p style={{ color: "rgba(255,255,255,0.78)", fontSize: "16px", lineHeight: 1.7, maxWidth: "680px", marginBottom: "28px" }}>
             Stay up-to-date with the latest developments, market trends, and technological innovations shaping the global agriculture industry.
           </p>
+          <div style={{ position: "relative", maxWidth: "560px" }}>
+            <Search style={{ position: "absolute", left: "20px", top: "50%", transform: "translateY(-50%)", width: "20px", height: "20px", color: "#9ca3af", pointerEvents: "none" }} />
+            <input
+              type="text"
+              placeholder="Search news articles..."
+              style={{ width: "100%", height: "52px", paddingLeft: "52px", paddingRight: "24px", borderRadius: "9999px", backgroundColor: "#ffffff", color: "#1f2937", border: "none", outline: "none", boxShadow: "0 10px 25px rgba(0,0,0,0.15)", fontSize: "14px", boxSizing: "border-box" }}
+            />
+          </div>
         </div>
-      </div>
+      </section>
 
       <main className="flex-grow py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

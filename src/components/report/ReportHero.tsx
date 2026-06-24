@@ -1,36 +1,42 @@
-import { Download, ListTree } from "lucide-react"
+import { ShoppingCart, FileText, Mail, RefreshCw } from "lucide-react";
+import { ReportStatsGrid } from "./ReportStatsGrid"
 
 export function ReportHero() {
   return (
-    <div className="relative bg-[#14532d] text-white pt-20 pb-32 lg:pt-24 lg:pb-40 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Subtle dot pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(#ffffff 1px, transparent 1px)", backgroundSize: "24px 24px" }}></div>
-        {/* Glowing Orbs */}
-        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-green-400/20 blur-[120px]"></div>
-        <div className="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-emerald-500/20 blur-[120px]"></div>
-      </div>
+    <section className="hero" aria-label="Report overview">
+      <div className="hero-inner">
+        <nav className="breadcrumb" aria-label="Breadcrumb">
+          <a href="https://www.agricultureindustryinsights.com">Home</a>
+          <span className="sep" aria-hidden="true">&rsaquo;</span>
+          <a href="https://www.agricultureindustryinsights.com/agritech">AgriTech</a>
+          <span className="sep" aria-hidden="true">&rsaquo;</span>
+          <span className="current">Precision Agriculture Market</span>
+        </nav>
 
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center text-center">
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-5xl leading-tight text-white tracking-tight">
-          Precision Agriculture Market Size, Share &amp; Forecast 2026–2035
-        </h1>
-        <p className="text-green-50 text-lg md:text-xl max-w-3xl mb-10 leading-relaxed font-medium opacity-90">
-          The Global Precision Agriculture Market was valued at USD 8.7 billion in 2025 and is projected to reach USD 22.6 billion by 2035, at a CAGR of 11.2% from 2026 to 2035.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <button className="flex items-center justify-center gap-2 bg-[#22c55e] hover:bg-[#16a34a] text-white font-bold py-3.5 px-8 rounded-md transition-colors w-full sm:w-auto shadow-lg shadow-green-500/20">
-            <Download className="w-5 h-5" />
-            Download Free Sample PDF
-          </button>
-          <button className="flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 text-white font-bold py-3.5 px-8 rounded-md transition-colors border border-white/30 w-full sm:w-auto">
-            <ListTree className="w-5 h-5" />
-            View Table of Contents
-          </button>
+        <h1>Precision Agriculture Market <em>Size, Share &amp; Forecast</em> 2026&ndash;2035</h1>
+
+        <div className="analyst-meta">
+          <div className="analyst-avatar" aria-hidden="true">MK</div>
+          <div className="analyst-info">
+            <span className="analyst-byline">By <strong style={{color:"white"}}>Meera Krishnan</strong>, Senior Research Analyst</span>
+            <div className="analyst-meta-row">
+              <span>Reviewed by Daniel Okonkwo</span>
+              <span className="sep">|</span>
+              <span className="badge"><RefreshCw size={14} className="inline mr-1" /> Updated: June 2026</span>
+              <span className="sep">|</span>
+              <span>Report ID: AII-2274</span>
+            </div>
+          </div>
+        </div>
+
+        <ReportStatsGrid />
+
+        <div className="cta-row">
+          <a href="#buy" className="btn btn-primary"><span className="btn-icon"><ShoppingCart size={18} className="inline mr-2" /></span> Buy Report <span className="price-hint">USD 4,490</span></a>
+          <a href="#sample" className="btn btn-secondary"><span className="btn-icon"><FileText size={18} className="inline mr-2" /></span> Free Sample</a>
+          <a href="#enquire" className="btn btn-ghost"><span className="btn-icon"><Mail size={18} className="inline mr-2" /></span> Enquire</a>
         </div>
       </div>
-    </div>
-  )
+    </section>
+  );
 }

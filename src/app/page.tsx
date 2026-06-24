@@ -1,23 +1,33 @@
 import { Header } from "@/components/layout/Header"
-import { Footer } from "@/components/layout/Footer"
 import { Hero } from "@/components/sections/Hero"
-import { ClientMarquee } from "@/components/sections/ClientMarquee"
-import { FeaturedReports } from "@/components/sections/FeaturedReports"
-
-import { LatestNews } from "@/components/sections/LatestNews"
-import { LatestBlogs } from "@/components/sections/LatestBlogs"
+import { Stats } from "@/components/sections/Stats"
 import { AboutUs } from "@/components/sections/AboutUs"
+import { FeaturedReports } from "@/components/sections/FeaturedReports"
+import { WhyUs } from "@/components/sections/WhyUs"
+import { Testimonials } from "@/components/sections/Testimonials"
+import { Methodology } from "@/components/sections/Methodology"
+import { FAQ } from "@/components/sections/FAQ"
+import { LatestBlogs } from "@/components/sections/LatestBlogs"
+import { LatestNews } from "@/components/sections/LatestNews"
+import { Newsletter } from "@/components/sections/Newsletter"
+import { Footer } from "@/components/layout/Footer"
+
 export default function Home() {
   return (
-    <div className="bg-gray-50 text-gray-800 font-sans selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header />
-      <main>
+      <main id="main-content" className="flex-grow">
         <Hero />
-        <FeaturedReports />
+        <Stats />
         <AboutUs />
-        <LatestNews />
+        <FeaturedReports />
+        <WhyUs />
+        <Testimonials />
+        <Methodology />
+        <FAQ />
         <LatestBlogs />
-        <ClientMarquee />
+        <LatestNews />
+        <Newsletter />
       </main>
       <Footer />
     </div>

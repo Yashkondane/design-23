@@ -1,96 +1,205 @@
+"use client"
+
+import { useState, useEffect, useRef } from "react"
+import Link from "next/link"
 import Image from "next/image"
-import { Search, FileText, Globe, Users } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { TrendingUp } from "lucide-react"
+
+const MOCK_REPORTS = [
+  { title: "Global Precision Agriculture Market Size, Share & Forecast", category: "AgriTech", url: "/report/global-precision-agriculture-market" },
+  { title: "Autonomous Farming Tractor Market Industry Analysis", category: "Machinery", url: "/report/autonomous-farming-tractor-market" },
+  { title: "Smart Irrigation Systems Global Market Report", category: "Irrigation", url: "/report/smart-irrigation-systems-market" },
+  { title: "Crop Protection Agrochemicals Market Trends", category: "Agrochemicals", url: "/report/crop-protection-agrochemicals-market" },
+  { title: "Livestock Monitoring & Wearable Sensors Market Forecast", category: "Livestock", url: "/report/livestock-monitoring-sensors-market" },
+  { title: "Vertical Farming & Indoor Agriculture Global Market", category: "Farming", url: "/report/vertical-farming-indoor-agriculture" },
+  { title: "Agricultural Drones & UAVs Market Size & Growth", category: "Drones", url: "/report/agricultural-drones-uavs-market" },
+  { title: "Organic Fertilizers Market Share and Forecast", category: "Agrochemicals", url: "/report/organic-fertilizers-market" },
+]
 
 export function Hero() {
+  const [query, setQuery] = useState("")
+  const trimmedQuery = query.trim()
+  const suggestions = trimmedQuery.length > 2
+    ? MOCK_REPORTS.filter(report => report.title.toLowerCase().includes(trimmedQuery.toLowerCase()))
+    : []
+
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1)
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+
+  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    setQuery(val)
+    if (val.trim().length > 2) {
+      setShowSuggestions(true)
+    } else {
+      setShowSuggestions(false)
+    }
+    setActiveSuggestionIndex(-1)
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault()
+      setActiveSuggestionIndex(prev => prev < suggestions.length - 1 ? prev + 1 : prev)
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault()
+      setActiveSuggestionIndex(prev => (prev > 0 ? prev - 1 : -1))
+    } else if (e.key === "Enter") {
+      if (activeSuggestionIndex >= 0 && activeSuggestionIndex < suggestions.length) {
+        e.preventDefault()
+        router.push(suggestions[activeSuggestionIndex].url)
+        setShowSuggestions(false)
+      }
+    } else if (e.key === "Escape") {
+      setShowSuggestions(false)
+    }
+  }
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (query.trim()) {
+      router.push(`/reports?q=${encodeURIComponent(query)}`)
+    }
+  }
+
   return (
-    <section className="relative py-8 lg:py-12 overflow-hidden flex items-center justify-center">
-      {/* Background Image */}
-      <Image
-        src="/hero-bg.jpg"
-        alt="Agriculture Background"
-        fill
-        className="object-cover"
-        priority
-      />
-      
-      {/* Overlay - Sophisticated dark green/black gradient for text legibility */}
-      <div className="absolute inset-0 bg-brand-900/20 mix-blend-multiply"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/40"></div>
+    <section className="hero-section-custom" aria-label="Agriculture Industry Insights Homepage Hero">
+      <div className="w-full max-w-[1240px] mx-auto px-4 md:px-6">
+        <div className="hero-inner-custom">
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
-        
-        {/* Premium Typography with Gradient Highlight */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-3 tracking-tight drop-shadow-lg">
-          Agriculture Market <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-brand-300 drop-shadow-none">Intelligence</span> <br className="hidden md:block" />
-          &amp; Industry Insights
-        </h1>
-        
-        {/* Subtext with high-contrast shadow */}
-        <p className="text-base md:text-lg text-brand-50 mb-6 leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-semibold">
-          Real-time agriculture news, market analysis, technology trends and industry research covering
-          AgriTech, Precision Agriculture, Farm Equipment, Irrigation, Livestock and Food Processing.
-        </p>
+          {/* Left Column */}
+          <div className="hero-content-custom">
+            <div className="hero-eyebrow-custom">
+              <span className="hero-eyebrow-dot-custom"></span>
+              Trusted Since 2018 · 1,500+ Global Clients
+            </div>
 
-        {/* Premium Glassmorphic Search Bar */}
-        <div className="bg-white/95 backdrop-blur-md p-1.5 rounded-full shadow-[0_15px_40px_rgba(0,0,0,0.5)] border border-white/40 flex items-center mb-6 max-w-2xl w-full mx-auto transition-transform hover:scale-[1.015] duration-300">
-          <div className="pl-4 pr-2 text-brand-600">
-            <Search className="w-5 h-5 lg:w-6 lg:h-6" />
-          </div>
-          <input
-            type="text"
-            placeholder="Search reports, articles, news..."
-            className="flex-1 bg-transparent py-3 focus:outline-none text-gray-800 placeholder-gray-500 font-medium text-base lg:text-lg"
-          />
-          <button className="bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white px-6 lg:px-8 py-3 rounded-full font-bold text-base transition-all duration-300 shadow-[0_4px_15px_rgba(34,197,94,0.4)]">
-            Search
-          </button>
-        </div>
+            <h1 className="hero-headline-custom">
+              Global <em>Agriculture Research Reports</em> {"&"} Industry Forecasts
+            </h1>
+            <p className="hero-subheadline-custom">
+              Data-driven market size, CAGR forecasts, segmentation analysis &amp; competitive intelligence across all agricultural sectors. Make confident strategic decisions backed by verified analyst data.
+            </p>
 
-        {/* Soft Glass Tags */}
-        <div className="flex flex-wrap justify-center items-center gap-2 lg:gap-3 text-xs md:text-sm">
-          <span className="font-semibold text-white drop-shadow-md mr-1">Popular Searches:</span>
-          {["AgriTech", "Precision Agriculture", "Drones", "Sustainability"].map((tag) => (
-            <a
-              key={tag}
-              href="#"
-              className="px-4 py-2 rounded-full bg-white/10 hover:bg-brand-500 hover:border-brand-400 text-white backdrop-blur-md border border-white/20 transition-all duration-300 shadow-sm"
-            >
-              {tag}
-            </a>
-          ))}
-        </div>
+            <div className="hero-search-wrap-custom" ref={containerRef}>
+              <form className="hero-search-form-custom" onSubmit={handleSearchSubmit} role="search" aria-label="Search Market Research Reports">
+                <label htmlFor="hero-search" className="sr-only">Search reports</label>
+                <input
+                  type="search"
+                  id="hero-search"
+                  name="q"
+                  placeholder="Search 20,000+ agriculture market reports…"
+                  value={query}
+                  onChange={handleQueryChange}
+                  onKeyDown={handleKeyDown}
+                  onFocus={() => query.trim().length > 2 && setShowSuggestions(true)}
+                  autoComplete="off"
+                />
+                <button type="submit" aria-label="Search">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  Search
+                </button>
+              </form>
 
-        {/* Refined Glassmorphic Key Stats */}
-        <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 lg:gap-6 mt-8 w-full max-w-4xl">
-          <div className="flex items-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl px-5 lg:px-6 py-3.5 shadow-xl hover:bg-white/20 transition-colors duration-300">
-            <div className="bg-white/20 text-white rounded-full p-2.5 border border-white/20 shadow-inner">
-              <FileText className="w-5 h-5 lg:w-6 lg:h-6" />
+              {/* Suggestions Dropdown */}
+              {showSuggestions && suggestions.length > 0 && (
+                <div className="absolute left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 max-h-[300px] overflow-y-auto">
+                  {suggestions.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => {
+                        router.push(item.url)
+                        setShowSuggestions(false)
+                      }}
+                      className={`px-5 py-3.5 cursor-pointer border-b border-gray-50 flex items-center justify-between text-left hover:bg-emerald-50 transition-colors ${index === activeSuggestionIndex ? "bg-emerald-50" : ""}`}
+                    >
+                      <div>
+                        <div className="text-sm font-bold text-gray-900 leading-tight">{item.title}</div>
+                        <div className="text-[10px] text-emerald-700 font-bold uppercase tracking-wider mt-1">{item.category}</div>
+                      </div>
+                      <span className="text-emerald-600 font-bold text-xs">View →</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="text-left">
-              <p className="text-xl lg:text-2xl font-bold text-white leading-none mb-1 drop-shadow-sm">1,200+</p>
-              <p className="text-[11px] lg:text-xs text-brand-100 font-semibold uppercase tracking-wider drop-shadow-sm">Reports</p>
+
+            <div className="hero-tags-custom" aria-label="Popular report searches">
+              <span className="hero-tags-label-custom">Popular:</span>
+              <Link href="/category/agritech-innovation">AgriTech</Link>
+              <Link href="/category/precision-agriculture">Precision Farming</Link>
+              <Link href="/category/farm-equipment-machinery">Farm Machinery</Link>
+              <Link href="/category/irrigation-water-management">Smart Irrigation</Link>
+              <Link href="/category/livestock-monitoring">Livestock Tech</Link>
             </div>
-          </div>
-          <div className="flex items-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl px-5 lg:px-6 py-3.5 shadow-xl hover:bg-white/20 transition-colors duration-300">
-            <div className="bg-white/20 text-white rounded-full p-2.5 border border-white/20 shadow-inner">
-              <Globe className="w-5 h-5 lg:w-6 lg:h-6" />
-            </div>
-            <div className="text-left">
-              <p className="text-xl lg:text-2xl font-bold text-white leading-none mb-1 drop-shadow-sm">50+</p>
-              <p className="text-[11px] lg:text-xs text-brand-100 font-semibold uppercase tracking-wider drop-shadow-sm">Countries Covered</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl px-5 lg:px-6 py-3.5 shadow-xl hover:bg-white/20 transition-colors duration-300">
-            <div className="bg-white/20 text-white rounded-full p-2.5 border border-white/20 shadow-inner">
-              <Users className="w-5 h-5 lg:w-6 lg:h-6" />
-            </div>
-            <div className="text-left">
-              <p className="text-xl lg:text-2xl font-bold text-white leading-none mb-1 drop-shadow-sm">10,000+</p>
-              <p className="text-[11px] lg:text-xs text-brand-100 font-semibold uppercase tracking-wider drop-shadow-sm">Monthly Readers</p>
+
+            <div className="hero-cta-row-custom">
+              <Link href="/reports" className="btn-hero-primary-custom">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+                Browse All Reports
+              </Link>
+              <Link href="/free-sample" className="btn-hero-secondary-custom">Request Free Sample</Link>
             </div>
           </div>
+
+          {/* Right Column: Hero Visual */}
+          <div className="relative flex justify-center lg:justify-end w-full mt-12 lg:mt-0 lg:w-auto flex-1 lg:max-w-[520px] xl:max-w-[580px]" aria-hidden="true">
+
+
+            {/* Image frame */}
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(27,94,32,0.16),0_2px_8px_rgba(0,0,0,0.06)] border border-white ring-1 ring-emerald-100">
+              <Image
+                src="/hero-visual.png"
+                alt="Global agriculture market research — aerial farmland data intelligence"
+                width={960}
+                height={600}
+                className="w-full h-auto object-cover block"
+                priority
+              />
+
+              {/* Floating stat card — bottom left */}
+              <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-white px-4 py-3 flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center flex-shrink-0">
+                  <TrendingUp size={17} className="text-white" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Agri Market CAGR</div>
+                  <div className="text-[18px] font-extrabold text-emerald-700 leading-tight">15.7%</div>
+                  <div className="text-[9px] text-gray-400 font-medium">2025–2035 Global Forecast</div>
+                </div>
+              </div>
+
+              {/* Floating stat card — top right */}
+              <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-white px-4 py-2.5 text-center">
+                <div className="text-[20px] font-extrabold text-gray-900 leading-tight">$28.8B</div>
+                <div className="text-[9px] font-bold uppercase tracking-wider text-emerald-600">Market Size 2025</div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
   )
 }
+

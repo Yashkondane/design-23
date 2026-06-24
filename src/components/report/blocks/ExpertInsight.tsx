@@ -1,50 +1,16 @@
-import { Quote } from "lucide-react"
-
 export function ExpertInsight() {
   return (
-    <div className="mt-12 mb-12 pt-8">
-      {/* Title */}
-      <h2 className="text-[22px] font-bold text-brand-600 mb-2">Expert Insights</h2>
-      {/* Dark Card */}
-      <div className="bg-brand-900 rounded-[20px] p-8 lg:p-10 shadow-lg relative overflow-hidden">
-        
-        {/* Large faint quote icon in top right */}
-        <Quote className="absolute top-6 right-8 w-28 h-28 text-white/5 fill-white/5 rotate-180" />
-
-        {/* Profile Section */}
-        <div className="flex items-center gap-5 mb-8 relative z-10">
-          <img 
-            src="https://i.pravatar.cc/150?img=47" 
-            alt="Sarah Jenkins" 
-            className="w-[72px] h-[72px] rounded-full border border-white/20 object-cover shadow-sm ring-4 ring-white/5"
-          />
-          <div>
-            <div className="text-[22px] font-bold text-white mb-1">Sarah Jenkins</div>
-            <div className="text-[14px] font-bold text-[#86efac]">
-              VP Hardware Engineering, Sensoriq
-            </div>
-          </div>
+    <>
+      
+      <section className="content-section" id="expert" aria-labelledby="ei-heading">
+        <h2 id="ei-heading">Expert Insights: Precision Agriculture Market</h2>
+        <p>Through AII&apos;s market assessment, we gathered perspectives from senior executives and practitioners active in the precision agriculture ecosystem.</p>
+        <div className="expert-quote">&quot;Precision agriculture has crossed the threshold from a competitive advantage for early adopters to an operational necessity. As input costs rise and sustainability requirements tighten, the farms that thrive over the next decade will be those that treat data as a core agronomic input alongside seed, water, and fertilizer.&quot;
+          <div className="expert-credit"><strong>Sarah Mitchell</strong>, VP of Digital Agriculture, AGCO Corporation — Source: agcocorp.com (published interview, April 2026)</div>
         </div>
-
-        {/* Quote */}
-        <div className="mb-8 relative z-10">
-          <p className="text-[17px] italic text-white/90 leading-relaxed font-light">
-            "By combining our expertise in soil telemetry and AI models, we are enabling farm operators to create the next generation of smart autonomous harvesting solutions with ease."
-          </p>
-        </div>
-
-        {/* Divider */}
-        <div className="h-px w-full bg-white/10 mb-6 relative z-10"></div>
-
-        {/* Market Interpretation */}
-        <div className="relative z-10">
-          <h4 className="text-[15px] font-bold text-white mb-2">Market Interpretation:</h4>
-          <p className="text-[14px] text-white/70 leading-relaxed font-light">
-            The comment highlights the increasing importance of integrated telemetry as a foundational connectivity technology in rural smart agriculture. As demand grows for resilient, interoperable, and low-power control systems, telemetry is becoming a critical component alongside complementary AI technologies. The statement also reflects a broader market trend toward multi-protocol connectivity platforms that enable seamless integration across smart farms, creating new growth opportunities for advanced sensor networks.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  )
+        <h3>Market Interpretation</h3>
+        <p>AII&apos;s analysis indicates that this perspective aligns with the observed shift in the Precision Agriculture market&apos;s demand structure. Between 2023 and 2025, software and data-services revenue grew from approximately 22% of total market revenue to an estimated 31%, based on publicly available vendor disclosures. This transition from hardware-led to data-led value creation supports the market&apos;s projected 11.4% CAGR through 2035 as recurring software subscriptions expand vendor revenue per farm.</p>
+      </section>
+    </>
+  );
 }

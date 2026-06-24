@@ -1,37 +1,24 @@
-import { CheckCircle2 } from "lucide-react"
-
 export function KeyTakeaways() {
-  const takeaways = [
-    { text: "Hardware segment dominated the Precision Agriculture Market at USD 4.7 billion in 2025.", isBoldPrefix: "By Component," },
-    { text: "Software segment is the fastest-growing category, led by AI analytics expanding at a CAGR of 13.3% from 2026 to 2035.", isBoldPrefix: "The Software segment" },
-    { text: "Large Farms dominated the market at USD 4.9 billion in 2025.", isBoldPrefix: "By Organisation Size," },
-    { text: "Smart Irrigation application is the fastest-growing segment at a CAGR of 14.8% from 2026 to 2035.", isBoldPrefix: "By Application," },
-    { text: "North America dominated the market at USD 3.1 billion in 2025 and is forecast to reach USD 8.2 billion by 2035.", isBoldPrefix: "North America" },
-    { text: "Asia-Pacific is the fastest-growing major region at a CAGR of 12.9% from 2026 to 2035.", isBoldPrefix: "Asia-Pacific" },
-    { text: "Guidance Systems captured the largest revenue share, accounting for over 42% of the market in 2025.", isBoldPrefix: "By Technology," },
-    { text: "Variable Rate Technology (VRT) segment is projected to witness substantial growth, accelerating at a CAGR of 12.4% during the forecast period.", isBoldPrefix: "The Variable Rate Technology (VRT)" },
-    { text: "Cellular networks represented the dominant connectivity infrastructure, valued at USD 3.8 billion in 2025.", isBoldPrefix: "By Connectivity," },
-    { text: "LPWAN (Low Power Wide Area Network) segment is anticipated to emerge as the fastest-growing connectivity protocol due to minimal power consumption requirements.", isBoldPrefix: "The LPWAN" },
-    { text: "Europe held the second-largest market share globally, driven by stringent agricultural regulations and high sustainability targets set by the EU.", isBoldPrefix: "Europe" },
-    { text: "Strategic partnerships and acquisitions are increasing, evidenced by a 24% year-over-year increase in ag-tech M&A activity in 2025.", isBoldPrefix: "Key market players" }
-  ]
-
   return (
-    <div className="mt-12 mb-12 pt-8">
-      <h2 className="text-[22px] font-bold text-brand-600 mb-2">Key Takeaways</h2>
-      <ul className="space-y-4">
-        {takeaways.map((item, idx) => {
-          const splitText = item.text.replace(item.isBoldPrefix, "")
-          return (
-            <li key={idx} className="flex items-start gap-3 border-b border-gray-100 pb-4 last:border-0">
-              <CheckCircle2 className="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
-              <p className="text-[13px] text-gray-600 leading-relaxed">
-                <span className="font-bold text-brand-900">{item.isBoldPrefix}</span> {splitText}
-              </p>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
-  )
+    <section className="content-section" id="key-takeaways" aria-labelledby="kt-heading">
+      <h2 id="kt-heading">Precision Agriculture Market Key Takeaways</h2>
+      <p>From our research, we found that the Precision Agriculture market presents strong growth across all segmentation axes, with data-driven farm management and autonomous machinery driving the dominant structural shifts through 2035.</p>
+      <div className="table-wrapper">
+        <table className="kt-table" aria-label="Key Takeaways by Segment and Region">
+          <thead><tr><th>Segment / Category</th><th>Key Takeaways</th></tr></thead>
+          <tbody>
+            <tr><td className="kt-label">By Technology</td><td>GPS/GNSS guidance dominated with ~31% revenue share in 2025 (USD 3.0 Bn). Variable Rate Technology is the fastest-growing sub-segment at 13.8% CAGR through 2035.</td></tr>
+            <tr><td className="kt-label">By Offering</td><td>Hardware accounted for ~58% share in 2025. Software &amp; services is the fastest-growing offering type, projected at 14.2% CAGR as data platforms scale.</td></tr>
+            <tr><td className="kt-label">By Application</td><td>Yield monitoring led with ~27% share in 2025 (USD 2.6 Bn). Variable rate application is the fastest-growing application at 14.5% CAGR from 2026&ndash;2035.</td></tr>
+            <tr><td className="kt-label">By Farm Size</td><td>Large farms dominated with ~64% share. Mid-sized farm adoption is accelerating at 13.9% CAGR driven by affordable managed offerings.</td></tr>
+            <tr><td className="kt-label">Dominant Region</td><td>North America &mdash; 36% share in 2025 (~USD 3.5 Bn). Driven by large-scale row-crop operations and advanced machinery adoption.</td></tr>
+            <tr><td className="kt-label">Fastest-Growing Region</td><td>Asia-Pacific &mdash; 14.6% CAGR from 2026&ndash;2035. China, India, and Australia driving adoption through mechanization and food-security programs.</td></tr>
+            <tr><td className="kt-label">Dominant Country</td><td>United States &mdash; approximately USD 3.0 billion in 2025. Home to the largest base of precision-equipped commercial farms.</td></tr>
+            <tr><td className="kt-label">Fastest-Growing Country</td><td>India &mdash; 16.2% CAGR from 2026&ndash;2035. Driven by government mechanization subsidies and agritech startup expansion.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p className="source-line">Source: AII Analysis, 2026</p>
+    </section>
+  );
 }

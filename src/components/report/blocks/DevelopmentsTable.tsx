@@ -1,60 +1,18 @@
 export function DevelopmentsTable() {
-  const developments = [
-    {
-      company: "John Deere",
-      type: "Product Launch",
-      date: "October 2025",
-      detail: "Unveiled the new autonomous 8R tractor equipped with 6 stereo cameras for 360-degree obstacle detection.",
-    },
-    {
-      company: "Trimble Inc.",
-      type: "Acquisition",
-      date: "August 2025",
-      detail: "Acquired Bilberry, a French AI startup specializing in targeted weed spraying systems.",
-    },
-    {
-      company: "Corteva Agriscience",
-      type: "Partnership",
-      date: "June 2025",
-      detail: "Partnered with Microsoft to deploy advanced machine learning models for predictive crop yield analytics globally.",
-    },
-    {
-      company: "DJI Agriculture",
-      type: "Product Launch",
-      date: "March 2025",
-      detail: "Launched the Agras T40 agricultural drone with a 40kg payload capacity and dual-rotor mapping system.",
-    },
-  ]
-
   return (
-    <div className="mt-8 mb-12">
-      <h3 className="text-xl font-bold text-gray-900 mb-6">Recent Strategic Developments</h3>
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse border border-gray-200">
-          <thead>
-            <tr className="bg-gray-50 border-b border-gray-200">
-              <th className="py-3 px-4 text-sm font-bold text-gray-900 border-r border-gray-200">Company</th>
-              <th className="py-3 px-4 text-sm font-bold text-gray-900 border-r border-gray-200">Type</th>
-              <th className="py-3 px-4 text-sm font-bold text-gray-900 border-r border-gray-200">Date</th>
-              <th className="py-3 px-4 text-sm font-bold text-gray-900">Key Detail</th>
-            </tr>
-          </thead>
-          <tbody>
-            {developments.map((dev, idx) => (
-              <tr key={idx} className="border-b border-gray-200 last:border-b-0 hover:bg-gray-50/50">
-                <td className="py-3 px-4 text-sm font-medium text-gray-900 border-r border-gray-200 whitespace-nowrap">{dev.company}</td>
-                <td className="py-3 px-4 text-sm text-gray-600 border-r border-gray-200 whitespace-nowrap">
-                  <span className="bg-gray-100 text-gray-700 px-2.5 py-1 rounded-sm text-xs font-semibold uppercase tracking-wide">
-                    {dev.type}
-                  </span>
-                </td>
-                <td className="py-3 px-4 text-sm text-gray-500 border-r border-gray-200 whitespace-nowrap">{dev.date}</td>
-                <td className="py-3 px-4 text-sm text-gray-700">{dev.detail}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )
+    <>
+      
+      <section className="content-section" id="developments" aria-labelledby="ld-heading">
+        <h2 id="ld-heading">Latest Developments in the Precision Agriculture Market</h2>
+        <p>Based on AII&apos;s research, we found that the following verified events have materially influenced the Precision Agriculture competitive and technology landscape since 2025.</p>
+        <div className="timeline" role="list">
+          <div className="tl-item" role="listitem"><div className="tl-date"><div className="tl-date-badge">May 2026</div></div><div className="tl-content"><strong>Deere &amp; Company</strong> expanded its autonomous tractor fleet availability to commercial corn and soybean operations across the U.S. Midwest, integrating See &amp; Spray targeted herbicide technology as standard.<div className="tl-source">Source: deere.com (press release)</div></div></div>
+          <div className="tl-item" role="listitem"><div className="tl-date"><div className="tl-date-badge">Mar 2026</div></div><div className="tl-content"><strong>Trimble Inc.</strong> launched a next-generation GNSS correction service delivering centimeter-level accuracy via low-earth-orbit satellite, extending precision guidance to previously uncovered rural regions.<div className="tl-source">Source: trimble.com (press release)</div></div></div>
+          <div className="tl-item" role="listitem"><div className="tl-date"><div className="tl-date-badge">Dec 2025</div></div><div className="tl-content"><strong>Bayer (Climate LLC)</strong> released an AI-driven carbon measurement module within its FieldView platform, enabling farmers to quantify and monetize soil carbon sequestration.<div className="tl-source">Source: climate.com (product blog)</div></div></div>
+          <div className="tl-item" role="listitem"><div className="tl-date"><div className="tl-date-badge">Sep 2025</div></div><div className="tl-content"><strong>AGCO Corporation</strong> advanced its precision-ag joint venture with Trimble, launching a unified guidance and farm-management platform branded PTx Trimble for mixed-fleet operations.<div className="tl-source">Source: agcocorp.com (press release)</div></div></div>
+        </div>
+        <p className="source-line">Source: AII Analysis, 2026</p>
+      </section>
+    </>
+  );
 }

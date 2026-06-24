@@ -1,198 +1,173 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Globe } from "lucide-react"
-
-const tableData = [
-  { region: "Asia-Pacific", size25: "$2.0", size35: "$6.7", cagr: "12.9%", driver: "Drone-as-a-service, IoT manufacturing, Gov Subsidies" },
-  { region: "Europe", size25: "$1.9", size35: "$5.1", cagr: "10.4%", driver: "Sustainability mandates, smart irrigation, CAP regulations" },
-  { region: "Latin America", size25: "$0.4", size35: "$1.3", cagr: "12.5%", driver: "Broadacre exports, fleet telematics, yield mapping" },
-  { region: "Middle East & Africa", size25: "$0.4", size35: "$1.3", cagr: "12.5%", driver: "Smart irrigation, vertical farming, mobile advisory" },
-  { region: "North America", size25: "$3.1", size35: "$8.2", cagr: "11.4%", driver: "Automated steering, large-scale IoT, OEM developers" }
-]
-
-const regionalData = {
-  "North America": {
-    size25: "$3.1B",
-    cagr: "11.4%",
-    desc: "North America is the largest regional market for Precision Agriculture. The region is anchored by massive corporate farming operations across the US Midwest and the headquarters of leading AgTech developers like John Deere and Trimble. Stringent environmental regulations and high labor costs reinforce demand for automated steering and high-efficiency sensor networks.",
-    primaryDriver: "Automated Steering, Large-scale IoT Deployments, Predictive Analytics",
-    countries: [
-      { name: "U.S. Precision Ag Market", flag: "us", desc: "The United States represents over 75% of North American Precision Ag revenue, underpinned by the world's highest per-capita agricultural technology expenditure and the headquarters of leading vendors." },
-      { name: "Canada Precision Ag Market", flag: "ca", desc: "Canada contributes approximately 15% of North American revenue. Canadian smart farm adoption is expanding rapidly, specifically in broadacre crops across Saskatchewan and Alberta." },
-      { name: "Mexico Precision Ag Market", flag: "mx", desc: "Mexico is the fastest-growing Precision Ag Market within North America, driven by the expanding export-oriented specialty crop sector requiring strict supply chain traceability." }
-    ]
-  },
-  "Europe": {
-    size25: "$1.9B",
-    cagr: "10.4%",
-    desc: "Europe is the second-largest Precision Agriculture market region. The region benefits from deep technological integration and stringent EU sustainability mandates (like the Common Agricultural Policy) that heavily incentivize eco-friendly, precise farming techniques. Smart irrigation and livestock monitoring are critical European growth pillars.",
-    primaryDriver: "EU Sustainability Mandates, Smart Irrigation, Livestock Health Monitoring",
-    countries: [
-      { name: "UK Precision Ag Market", flag: "gb", desc: "The United Kingdom is driven by advanced robotic farming trials and a rapidly expanding digital ag-tech ecosystem regulated by the DEFRA." },
-      { name: "Germany Precision Ag Market", flag: "de", desc: "Germany is distinguished by automotive industry leadership spilling over into advanced industrial IoT adoption for heavy farm machinery." },
-      { name: "France Precision Ag Market", flag: "fr", desc: "France demonstrates strong Precision Ag activity across viticulture and broadacre, supported by the 'France 2030' national investment plan." },
-      { name: "Italy Precision Ag Market", flag: "it", desc: "Italy is a growing market driven by smart irrigation components and advanced viticulture sensor networks." },
-      { name: "Spain Precision Ag Market", flag: "es", desc: "Spain is experiencing increasing adoption across greenhouse automation and smart water management due to severe drought conditions." },
-      { name: "Netherlands Precision Ag Market", flag: "nl", desc: "The Netherlands is a global leader in high-tech greenhouse automation, robotic harvesting, and vertical farming technologies." }
-    ]
-  },
-  "Asia-Pacific": {
-    size25: "$2.0B",
-    cagr: "12.9%",
-    desc: "Asia-Pacific is projected to be the fastest-growing region. Rapid population growth, increasing food demand, and massive governmental initiatives in countries like India and China are accelerating the deployment of smart farming tools, particularly affordable drone-as-a-service models.",
-    primaryDriver: "Drone-as-a-service, Government Subsidies, High Population Density",
-    countries: [
-      { name: "China Precision Ag Market", flag: "cn", desc: "China leads the APAC market, driven by massive state-sponsored agricultural modernization programs and heavy drone deployments." },
-      { name: "India Precision Ag Market", flag: "in", desc: "India is experiencing rapid growth fueled by government digitization initiatives and affordable local AgriTech startups." },
-      { name: "Australia Precision Ag Market", flag: "au", desc: "Australia features highly advanced broadacre farming operations with near-universal adoption of automated steering." },
-      { name: "Japan Precision Ag Market", flag: "jp", desc: "Japan is pioneering autonomous tractors and robotic harvesting to combat severe agricultural labor shortages." }
-    ]
-  },
-  "Middle East & Africa": {
-    size25: "$0.4B",
-    cagr: "12.5%",
-    desc: "The Middle East & Africa represents an emerging frontier for precision agriculture. The Middle East is heavily investing in controlled environment agriculture and smart irrigation to combat extreme aridity, while Africa sees rising adoption of mobile-based farm advisory systems.",
-    primaryDriver: "Extreme Aridity Solutions, Mobile Advisory Apps, Controlled Environment Ag",
-    countries: [
-      { name: "Israel Precision Ag Market", flag: "il", desc: "Israel is a global pioneer in drip irrigation tech and advanced agricultural data analytics startups." },
-      { name: "South Africa Precision Ag Market", flag: "za", desc: "South Africa leads the African continent in commercial precision ag, particularly in variable rate technology." },
-      { name: "UAE Precision Ag Market", flag: "ae", desc: "The UAE is investing billions into vertical farming and AI-driven greenhouses to ensure national food security." }
-    ]
-  },
-  "Latin America": {
-    size25: "$0.4B",
-    cagr: "12.5%",
-    desc: "Latin America is experiencing steady growth, primarily led by Brazil and Argentina's massive soybean and corn export markets. In these regions, even minor improvements in operational efficiency via precision tech directly impact global competitiveness and raw output tonnage.",
-    primaryDriver: "Broadacre Export Markets, Yield Monitoring, Fleet Telematics",
-    countries: [
-      { name: "Brazil Precision Ag Market", flag: "br", desc: "Brazil dominates the region, with massive corporate farms heavily investing in fleet management and yield mapping for soy and sugarcane." },
-      { name: "Argentina Precision Ag Market", flag: "ar", desc: "Argentina shows strong adoption of no-till farming practices paired with advanced variable rate application technologies." },
-      { name: "Chile Precision Ag Market", flag: "cl", desc: "Chile focuses precision tech on high-value export crops, utilizing smart irrigation and advanced weather modeling." }
-    ]
-  }
-}
+import { useState } from "react";
+import { Globe, Pointer } from "lucide-react";
 
 export function RegionalOutlook() {
-  const tabs = ["North America", "Europe", "Asia-Pacific", "Middle East & Africa", "Latin America"]
-  const [activeTab, setActiveTab] = useState<keyof typeof regionalData>("North America")
-
-  const currentData = regionalData[activeTab]
-
+  const [activeRegion, setActiveRegion] = useState<string>("na");
   return (
-    <div className="mt-12 mb-12 pt-8">
-      <h2 className="text-[22px] font-bold text-brand-600 mb-2">Regional Outlook</h2>
-      <h3 className="text-[17px] font-bold text-brand-900 mb-6">Geographic Performance Snapshot</h3>
+    <>
+      
+      <section className="content-section" id="regional" aria-labelledby="rg-heading">
+        <h2 id="rg-heading">Precision Agriculture Market Regional Outlook</h2>
+        <p style={{fontSize: "14px", color: "var(--muted)", marginBottom: "4px"}}><Pointer size={16} className="inline mr-1" /> Click a region to explore its key national markets and growth drivers.</p>
 
-      {/* Table */}
-      <div className="border border-gray-100 rounded-lg mb-10 overflow-hidden shadow-sm">
-        <table className="w-full text-left text-[13px]">
-          <thead>
-            <tr className="bg-brand-900 text-white">
-              <th className="py-4 px-6 font-bold w-1/5">Region ▲</th>
-              <th className="py-4 px-6 font-bold">2025 (USD Bn)</th>
-              <th className="py-4 px-6 font-bold">2035 (USD Bn)</th>
-              <th className="py-4 px-6 font-bold">CAGR (%)</th>
-              <th className="py-4 px-6 font-bold">Key Driver</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((row, idx) => (
-              <tr key={idx} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
-                <td className="py-4 px-6 text-gray-800">{row.region}</td>
-                <td className="py-4 px-6 text-gray-600">{row.size25}</td>
-                <td className="py-4 px-6 text-gray-600">{row.size35}</td>
-                <td className="py-4 px-6 font-bold text-brand-600">{row.cagr}</td>
-                <td className="py-4 px-6 text-gray-500">{row.driver}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        
+        <div className="region-selector" role="tablist" aria-label="Select a region">
+          <button 
+            className={`region-tab ${activeRegion === 'na' ? 'active' : ''}`} 
+            role="tab" 
+            aria-selected={activeRegion === 'na'} 
+            onClick={() => setActiveRegion('na')}
+          >
+            <div className="region-name">North America</div>
+            <div className="region-val">$10.3B by &apos;35</div>
+          </button>
+          <button 
+            className={`region-tab ${activeRegion === 'eu' ? 'active' : ''}`} 
+            role="tab" 
+            aria-selected={activeRegion === 'eu'} 
+            onClick={() => setActiveRegion('eu')}
+          >
+            <div className="region-name">Europe</div>
+            <div className="region-val">$7.4B by &apos;35</div>
+          </button>
+          <button 
+            className={`region-tab ${activeRegion === 'apac' ? 'active' : ''}`} 
+            role="tab" 
+            aria-selected={activeRegion === 'apac'} 
+            onClick={() => setActiveRegion('apac')}
+          >
+            <div className="region-name">Asia-Pacific</div>
+            <div className="region-val">$7.9B by &apos;35</div>
+          </button>
+          <button 
+            className={`region-tab ${activeRegion === 'mea' ? 'active' : ''}`} 
+            role="tab" 
+            aria-selected={activeRegion === 'mea'} 
+            onClick={() => setActiveRegion('mea')}
+          >
+            <div className="region-name">Middle East &amp; Africa</div>
+            <div className="region-val">$1.8B by &apos;35</div>
+          </button>
+          <button 
+            className={`region-tab ${activeRegion === 'latam' ? 'active' : ''}`} 
+            role="tab" 
+            aria-selected={activeRegion === 'latam'} 
+            onClick={() => setActiveRegion('latam')}
+          >
+            <div className="region-name">Latin America</div>
+            <div className="region-val">$1.2B by &apos;35</div>
+          </button>
+        </div>
 
-      {/* Tabs / Cards */}
-      <div className="flex flex-wrap gap-4 mb-8">
-        {tabs.map((tab) => {
-          const isActive = activeTab === tab
-          const rowData = tableData.find(r => r.region === tab)
-          const subText = rowData ? `${rowData.size35}B by '35` : ""
-
-          return (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab as keyof typeof regionalData)}
-              className={`flex-1 min-w-[140px] p-4 rounded-xl border text-left transition-all ${
-                isActive
-                  ? "bg-brand-900 border-brand-900 shadow-md text-white scale-[1.02] z-10"
-                  : "bg-white border-gray-200 text-gray-700 hover:border-brand-300 hover:shadow-sm"
-              }`}
-            >
-              <div className="font-bold text-[15px] mb-1">{tab}</div>
-              <div className={`text-[12px] font-bold ${isActive ? 'text-brand-300' : 'text-gray-500'}`}>
-                {subText}
-              </div>
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Main Content Area */}
-      <div className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm flex flex-col lg:flex-row gap-10">
-        {/* Left Column: Sticky Overview */}
-        <div className="w-full lg:w-[35%] lg:sticky lg:top-8 h-fit">
-          <h3 className="text-[22px] leading-tight font-bold text-brand-900 mb-6">
-            {activeTab} Precision Agriculture Market
-          </h3>
-          
-          <div className="flex gap-4 mb-6">
-            <div className="flex-1 bg-gray-50 rounded-lg p-4 border border-gray-100">
-              <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">2025 Size</div>
-              <div className="text-[20px] font-bold text-brand-900">{currentData.size25}</div>
+        
+        <div className={`region-detail ${activeRegion === 'na' ? 'active' : ''}`} id="region-na" role="tabpanel">
+          <div className="region-detail-left">
+            <div className="region-mini-stats">
+              <div className="region-mini-stat"><div className="region-mini-label">2025 Size</div><div className="region-mini-val">$3.5B</div></div>
+              <div className="region-mini-stat"><div className="region-mini-label">CAGR</div><div className="region-mini-val green">11.4%</div></div>
             </div>
-            <div className="flex-1 bg-brand-50 rounded-lg p-4 border border-brand-100">
-              <div className="text-[10px] font-bold text-brand-700 uppercase tracking-wider mb-1">CAGR</div>
-              <div className="text-[20px] font-bold text-brand-600">{currentData.cagr}</div>
-            </div>
+            <p className="region-desc">North America is the dominant regional market, anchored by large-scale row-crop operations, advanced farm machinery adoption, and the headquartering of pivotal agritech players like John Deere, Trimble, and AGCO.</p>
+            <div className="region-driver-box"><strong>Primary Driver:</strong> Large commercial farms, established dealer networks, mature equipment financing</div>
           </div>
-
-          <p className="text-[13px] text-gray-600 leading-relaxed mb-8">
-            {currentData.desc}
-          </p>
-
-          <div className="bg-gray-50 border border-gray-100 border-l-[4px] border-l-amber-400 rounded-r-lg p-5">
-            <p className="text-[12px] text-gray-600">
-              <span className="font-bold text-brand-900">Primary Driver: </span>
-              {currentData.primaryDriver}
-            </p>
+          <div className="region-detail-right">
+            <div className="key-markets-title"><Globe size={20} className="inline mr-2" /> Key National Markets</div>
+            <div className="country-grid">
+              <div className="country-card" tabIndex={0} role="button">
+                <div className="country-head"><img src="https://flagcdn.com/us.svg" alt="" className="country-flag" /><span className="country-name">United States</span></div>
+                <div className="country-desc">Commands over 85% of regional revenue. The largest base of precision-equipped commercial farms and deepest agritech R&amp;D ecosystem drive sustained demand.</div>
+              </div>
+              <div className="country-card" tabIndex={0} role="button">
+                <div className="country-head"><img src="https://flagcdn.com/ca.svg" alt="" className="country-flag" /><span className="country-name">Canada</span></div>
+                <div className="country-desc">Strong growth supported by large-scale prairie grain farming and increasing adoption of variable rate and GPS-guided machinery.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Right Column: Country Grid */}
-        <div className="w-full lg:w-[65%]">
-          <div className="flex items-center gap-2 mb-6">
-            <Globe className="w-5 h-5 text-brand-600" />
-            <h4 className="text-[15px] font-bold text-brand-900">Key National Markets</h4>
+        
+        <div className={`region-detail ${activeRegion === 'eu' ? 'active' : ''}`} id="region-eu" role="tabpanel">
+          <div className="region-detail-left">
+            <div className="region-mini-stats">
+              <div className="region-mini-stat"><div className="region-mini-label">2025 Size</div><div className="region-mini-val">$2.6B</div></div>
+              <div className="region-mini-stat"><div className="region-mini-label">CAGR</div><div className="region-mini-val green">11.0%</div></div>
+            </div>
+            <p className="region-desc">Europe&apos;s precision agriculture market is driven by the EU Common Agricultural Policy&apos;s digital farming incentives and stringent environmental regulations promoting input-efficient farming practices.</p>
+            <div className="region-driver-box"><strong>Primary Driver:</strong> CAP digital subsidies, sustainability mandates, fertilizer-runoff regulation</div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {currentData.countries.map((country, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-3">
-                  <img 
-                    src={`https://flagcdn.com/w40/${country.flag}.png`} 
-                    alt={`${country.name} flag`} 
-                    className="w-6 h-auto rounded-sm border border-gray-200 shadow-sm"
-                  />
-                  <h5 className="font-bold text-[14px] text-brand-900 leading-tight">{country.name}</h5>
-                </div>
-                <p className="text-[12px] text-gray-600 leading-relaxed">
-                  {country.desc}
-                </p>
-              </div>
-            ))}
+          <div className="region-detail-right">
+            <div className="key-markets-title"><Globe size={20} className="inline mr-2" /> Key National Markets</div>
+            <div className="country-grid">
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/de.svg" alt="" className="country-flag" /><span className="country-name">Germany</span></div><div className="country-desc">Leading European market, supported by advanced agricultural machinery manufacturing and high mechanization rates.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/fr.svg" alt="" className="country-flag" /><span className="country-name">France</span></div><div className="country-desc">Largest EU agricultural producer with strong adoption of precision technology across cereal and vineyard operations.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/gb.svg" alt="" className="country-flag" /><span className="country-name">United Kingdom</span></div><div className="country-desc">Growing adoption driven by post-Brexit agricultural policy emphasizing productivity and environmental stewardship.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/nl.svg" alt="" className="country-flag" /><span className="country-name">Netherlands</span></div><div className="country-desc">High-intensity precision horticulture leader, with greenhouse and controlled-environment agriculture driving sensor demand.</div></div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  )
+
+        
+        <div className={`region-detail ${activeRegion === 'apac' ? 'active' : ''}`} id="region-apac" role="tabpanel">
+          <div className="region-detail-left">
+            <div className="region-mini-stats">
+              <div className="region-mini-stat"><div className="region-mini-label">2025 Size</div><div className="region-mini-val">$2.1B</div></div>
+              <div className="region-mini-stat"><div className="region-mini-label">CAGR</div><div className="region-mini-val green">14.6%</div></div>
+            </div>
+            <p className="region-desc">Asia-Pacific is the fastest-growing region in the Precision Agriculture market, driven by food-security imperatives, government mechanization programs, and a rapidly expanding agritech startup ecosystem across China, India, and Australia.</p>
+            <div className="region-driver-box"><strong>Primary Driver:</strong> Food security mandates, mechanization subsidies, agritech startups</div>
+          </div>
+          <div className="region-detail-right">
+            <div className="key-markets-title"><Globe size={20} className="inline mr-2" /> Key National Markets</div>
+            <div className="country-grid">
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/cn.svg" alt="" className="country-flag" /><span className="country-name">China</span></div><div className="country-desc">Largest APAC market, with state-backed agricultural modernization driving domestic drone and machinery adoption at scale.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/in.svg" alt="" className="country-flag" /><span className="country-name">India</span></div><div className="country-desc">Fastest-growing national market, supported by mechanization subsidies, agritech startup expansion, and drone-spraying policy liberalization.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/au.svg" alt="" className="country-flag" /><span className="country-name">Australia</span></div><div className="country-desc">Mature broadacre precision farming market with high GPS-guidance and variable rate adoption across large grain operations.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/jp.svg" alt="" className="country-flag" /><span className="country-name">Japan</span></div><div className="country-desc">Aging farmer population driving strong demand for autonomous and robotic farm machinery to offset labor shortages.</div></div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div className={`region-detail ${activeRegion === 'mea' ? 'active' : ''}`} id="region-mea" role="tabpanel">
+          <div className="region-detail-left">
+            <div className="region-mini-stats">
+              <div className="region-mini-stat"><div className="region-mini-label">2025 Size</div><div className="region-mini-val">$0.7B</div></div>
+              <div className="region-mini-stat"><div className="region-mini-label">CAGR</div><div className="region-mini-val green">10.0%</div></div>
+            </div>
+            <p className="region-desc">The Middle East &amp; Africa market is driven by water-scarcity-led precision irrigation adoption and large-scale commercial farming investments in Gulf states and South Africa.</p>
+            <div className="region-driver-box"><strong>Primary Driver:</strong> Water-efficient irrigation, food-security investment, commercial agriculture</div>
+          </div>
+          <div className="region-detail-right">
+            <div className="key-markets-title"><Globe size={20} className="inline mr-2" /> Key National Markets</div>
+            <div className="country-grid">
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/za.svg" alt="" className="country-flag" /><span className="country-name">South Africa</span></div><div className="country-desc">Most advanced precision agriculture market in Africa, with commercial grain and fruit operations driving adoption.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/sa.svg" alt="" className="country-flag" /><span className="country-name">Saudi Arabia</span></div><div className="country-desc">Water-scarcity-driven precision irrigation investment under national food-security and Vision 2030 programs.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/ae.svg" alt="" className="country-flag" /><span className="country-name">UAE</span></div><div className="country-desc">Leading controlled-environment and vertical farming adoption driven by arid-climate food production goals.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/eg.svg" alt="" className="country-flag" /><span className="country-name">Egypt</span></div><div className="country-desc">Nile-delta precision irrigation adoption growing under government agricultural modernization initiatives.</div></div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div className={`region-detail ${activeRegion === 'latam' ? 'active' : ''}`} id="region-latam" role="tabpanel">
+          <div className="region-detail-left">
+            <div className="region-mini-stats">
+              <div className="region-mini-stat"><div className="region-mini-label">2025 Size</div><div className="region-mini-val">$0.5B</div></div>
+              <div className="region-mini-stat"><div className="region-mini-label">CAGR</div><div className="region-mini-val green">9.2%</div></div>
+            </div>
+            <p className="region-desc">Latin America&apos;s market is anchored by large-scale soybean and sugarcane operations in Brazil and Argentina, where precision technology drives yield optimization across vast farming areas.</p>
+            <div className="region-driver-box"><strong>Primary Driver:</strong> Large-scale export agriculture, soybean &amp; sugarcane yield optimization</div>
+          </div>
+          <div className="region-detail-right">
+            <div className="key-markets-title"><Globe size={20} className="inline mr-2" /> Key National Markets</div>
+            <div className="country-grid">
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/br.svg" alt="" className="country-flag" /><span className="country-name">Brazil</span></div><div className="country-desc">Dominant regional market, driven by massive commercial soybean, corn, and sugarcane operations adopting precision at scale.</div></div>
+              <div className="country-card" tabIndex={0} role="button"><div className="country-head"><img src="https://flagcdn.com/ar.svg" alt="" className="country-flag" /><span className="country-name">Argentina</span></div><div className="country-desc">Strong adoption across Pampas grain belt, with high penetration of GPS-guidance and yield monitoring technology.</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

@@ -4,7 +4,7 @@ export function PortersFiveForces() {
   return (
     <div className="mb-16">
       <div className="mb-10 relative pb-4">
-        <h2 className="text-[22px] font-bold text-brand-600 mb-2">Porter's Five Forces Analysis</h2>
+        <h2 className="text-[22px] font-bold text-brand-600 mb-2">Porter&apos;s Five Forces Analysis</h2>
         <p className="text-[14px] text-gray-500 font-medium">Evaluation of competitive intensity and attractiveness within the global Precision Agriculture Market.</p>
         <div className="absolute bottom-0 left-0 w-12 h-1 bg-brand-600 rounded-full"></div>
       </div>
@@ -26,7 +26,7 @@ export function PortersFiveForces() {
         <div className="bg-white rounded-xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 p-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-green-500"></div>
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-[16px] font-bold text-[#1e293b]">Buyer's Power</h3>
+            <h3 className="text-[16px] font-bold text-[#1e293b]">Buyer&apos;s Power</h3>
             <span className="bg-green-100 text-green-700 text-[11px] font-bold px-2.5 py-1 rounded-md">High</span>
           </div>
           <p className="text-[13px] text-gray-600 leading-relaxed">
@@ -38,7 +38,7 @@ export function PortersFiveForces() {
         <div className="bg-white rounded-xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-gray-100 p-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-yellow-400"></div>
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-[16px] font-bold text-[#1e293b]">Supplier's Power</h3>
+            <h3 className="text-[16px] font-bold text-[#1e293b]">Supplier&apos;s Power</h3>
             <span className="bg-yellow-100 text-yellow-700 text-[11px] font-bold px-2.5 py-1 rounded-md">Moderate</span>
           </div>
           <p className="text-[13px] text-gray-600 leading-relaxed">
